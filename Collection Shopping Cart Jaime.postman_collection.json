@@ -1,0 +1,405 @@
+{
+	"info": {
+		"_postman_id": "b254cb6e-268e-444f-95e0-c02aae88f7ca",
+		"name": "Collection Shopping Cart Jaime",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17943943"
+	},
+	"item": [
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "addProductCart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZVVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc2MzExMjI3LCJleHAiOjE3NzYzMTE4Mjd9.g70NKdMOUch20OxfFnErKP1wzyokvGdZxozhfukR3x3PORXsySOyoMoH7huAOjUsWRwcB8VmvBkiJG9oWG9z4g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": 10,\r\n\t\"shipingAdress\": \"Calle 12303\",\r\n\t\"products\": [\r\n\t\t{\r\n\t\t\t\"productId\": 5,\r\n\t\t\t\"quantity\": 3,\r\n            \"unitPrice\": 695,\r\n            \"productName\": \"John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet\"\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"productId\": 1,\r\n\t\t\t\"quantity\": 5,\r\n            \"unitPrice\": 109.95,\r\n            \"productName\": \"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops\"\r\n\t\t},\r\n        {\r\n\t\t\t\"productId\": 2,\r\n\t\t\t\"quantity\": 10,\r\n            \"unitPrice\": 22.3,\r\n            \"productName\": \"Mens Casual Premium Slim Fit T-Shirts \"\r\n\t\t}\r\n\t]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/orders/addProductCart",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"orders",
+								"addProductCart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adjustOrderDetails",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZVVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc2MzA2Nzg2LCJleHAiOjE3NzYzMDczODZ9.zSDAisqAfbaKZaAUxe2kbLoSfXJeU5DwaMX-C8FkewhErcSFp_xofgFSk4ckmQmufp9vWcESepb1ticCx6eBLw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 10, \r\n  \"orderDetailIds\": [\r\n    {\r\n      \"orderDetailId\": 40,\r\n      \"productId\": 5,\r\n      \"quantity\": 1\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/orders/adjustOrderDetails",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"orders",
+								"adjustOrderDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZVVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc2MzA2MzkwLCJleHAiOjE3NzYzMDY5OTB9.dwGXnsHWN1-Cuub52ykR0CXECU4T843jY5a83PaPrGU0XYPY3-DwyIjLDhwsvJ7eDmR3ekQ-h8gi6Uhk0OrDTA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/orders/deleteOrder/14",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"orders",
+								"deleteOrder",
+								"14"
+							],
+							"query": [
+								{
+									"key": "idOrder",
+									"value": "14",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZVVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc2MzA2Nzg2LCJleHAiOjE3NzYzMDczODZ9.zSDAisqAfbaKZaAUxe2kbLoSfXJeU5DwaMX-C8FkewhErcSFp_xofgFSk4ckmQmufp9vWcESepb1ticCx6eBLw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MzQ2NDcyOTEsImV4cCI6MTczNDY0Nzg5MX0._lAkJFltlUhpQS1Sz-QvsqILOW5PnXws-S3PdCAaMm--S_aIRjV1fsOx78fw5tSvrUzCin8Pcpw-BojX4Dr6cQ",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/orders/getOrder?username=jaimeUser",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"orders",
+								"getOrder"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "jaimeUser"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "getSingleProduct",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZVVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc2MjY5Mjk0LCJleHAiOjE3NzYyNjk4OTR9.Uocuc2c3IEyz_T_6VNVrg7RyuXDzBgPWwEwHk8h5NNMmb5h_-aqPFLDn3N5fBxi7d0TZryZZapOthJ7llYfeDw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/products/singleProduct?idProduct=20",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"products",
+								"singleProduct"
+							],
+							"query": [
+								{
+									"key": "idProduct",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allProducts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZVVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc2MjcyOTM3LCJleHAiOjE3NzYyNzM1Mzd9.u_oncLcFKKbxuk8cM5cMQgg_bWnnQ0AvmZ_VFsk5sdA7s2aa8bhS6PY-yw68c8SYU9HvS5HuIAWDE7wmik78aQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/products/allProducts",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"products",
+								"allProducts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "paymentCash",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZVVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc2MzExOTc1LCJleHAiOjE3NzYzMTI1NzV9.nkcFBtq5Ryu8Cs4RdbydBX2q7wSKGrk2m_uZ5khcEcxrM7_gw2ItRLIZ1DgJJtde6PlK4rpGd14gs2dHrfpDmQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 10,\r\n  \"amount\": 5000,  \r\n  \"paymentType\": \"CREDIT_CARD\",  \r\n  \"idOrder\": 15\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/payment/createPayment",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"payment",
+								"createPayment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "addClient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Jaime2\",\r\n  \"lastName\": \"Rodas\",\r\n  \"email\": \"jaime2@example.com\",\r\n  \"phoneNumber\": \"123456789\",\r\n  \"address\": \"Calle 123\",\r\n  \"country\": \"El Salvador\",\r\n  \"city\": \"San Salvador\",\r\n  \"state\": \"San Salvador\",\r\n  \"username\": \"jaimeUser2\",\r\n  \"password\": \"securePass123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/clients/addClient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"clients",
+								"addClient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getClient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZVVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc2MzEzMjA3LCJleHAiOjE3NzYzMTM4MDd9.FiT7xWnLv5YeJor4NNG551-5bvQ2EI0k96O0XPBqfS9zfD4rYk5oAsEsrj3-TO6tggFlWQlFisufvGvxg9JSEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/clients/getClient?username=jaimeUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"clients",
+								"getClient"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "jaimeUser"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n  \"username\": \"jaimeUser\",\r\n  \"password\": \"securePass123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOaiJIUzUxMiJ9.eyJqdGkiOiJKV1QiLCJzdWIiOiJqYWltZVVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc2Mjg4NjA0LCJleHAiOjE3NzYyODkyMDR9.2G7a5OuISeNDghdG2G0ti73mCho3THnEwSOH7_ApFmVnB-6T2om6K1bxYgZ3MFTXgUzjOhdQkJaXkV_glQlIlg"
+		}
+	]
+}
