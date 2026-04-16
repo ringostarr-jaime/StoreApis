@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Store API - Swagger UI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui.min.css" />
+  <style>
+    body { margin: 0; padding: 0; }
+    .topbar { display: none; }
+  </style>
+</head>
+<body>
+  <div id="swagger-ui"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui-bundle.min.js"></script>
+  <script>
+    window.onload = () => {
+      const spec = {
+        "openapi": "3.1.0",
+        "info": {
+          "title": "Store API",
+          "description": "API para autenticación, clientes, órdenes y pagos",
+          "version": "1.0.0"
+        },
+        "servers": [
+          { "url": "http://localhost:8080" }
+        ],
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "paths": {
+          "/token": {
+            "post": {
+              "tags": ["Auth"],
+              "summary": "Generar token JWT",
+              "description": "Valida credenciales y devuelve un token JWT.",
+              "security": [],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "required": ["username", "password"],
+                      "properties": {
+                        "username": { "type": "string", "minLength": 4, "maxLength": 50, "example": "jaimeUser" },
+                        "password": { "type": "string", "minLength": 8, "maxLength": 100, "example": "securePass123" }
+                      }
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Usuario autenticado correctamente",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "user": { "type": "string", "example": "jaimeUser" },
+                          "token": { "type": "string", "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": { "description": "Credenciales inválidas" }
+              }
+            }
+          },
+          "/v1/clients/addClient": {
+            "post": {
+              "tags": ["Clients"],
+              "summary": "Crear nuevo cliente",
+              "security": [],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "required": ["firstName", "lastName", "email", "username", "password"],
+                      "properties": {
+                        "firstName": { "type": "string", "minLength": 1, "maxLength": 100, "example": "Jaime" },
+                        "lastName": { "type": "string", "minLength": 1, "maxLength": 100, "example": "Rodas" },
+                        "email": { "type": "string", "format": "email", "example": "jaime.rodas@example.com" },
+                        "phoneNumber": { "type": "string", "maxLength": 20, "example": "+50377778888" },
+                        "address": { "type": "string", "maxLength": 200, "example": "Av. Siempre Viva 123" },
+                        "country": { "type": "string", "maxLength": 100, "example": "El Salvador" },
+                        "city": { "type": "string", "maxLength": 100, "example": "San Salvador" },
+                        "state": { "type": "string", "maxLength": 100, "example": "San Salvador" },
+                        "username": { "type": "string", "minLength": 4, "maxLength": 50, "example": "jrodas" },
+                        "password": { "type": "string", "minLength": 8, "maxLength": 100, "example": "StrongPass123" }
+                      }
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Cliente creado exitosamente",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer", "example": 1 },
+                          "username": { "type": "string", "example": "jrodas" },
+                          "email": { "type": "string", "example": "jaime.rodas@example.com" }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": { "description": "Datos inválidos en la petición" }
+              }
+            }
+          },
+          "/v1/clients/getClient": {
+            "get": {
+              "tags": ["Clients"],
+              "summary": "Obtener cliente por username",
+              "parameters": [
+                {
+                  "name": "username",
+                  "in": "query",
+                  "required": true,
+                  "schema": { "type": "string", "minLength": 4, "maxLength": 50 },
+                  "example": "jrodas"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Cliente encontrado",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer", "example": 1 },
+                          "firstName": { "type": "string", "example": "Jaime" },
+                          "lastName": { "type": "string", "example": "Rodas" },
+                          "email": { "type": "string", "example": "jaime.rodas@example.com" }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": { "description": "Cliente no encontrado" }
+              }
+            }
+          },
+          "/v1/orders/addProductCart": {
+            "post": {
+              "tags": ["Orders"],
+              "summary": "Agregar productos al carrito",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "required": ["products", "userId", "shipingAdress"],
+                      "properties": {
+                        "userId": { "type": "integer", "minimum": 1, "example": 10 },
+                        "shipingAdress": { "type": "string", "example": "Av. Siempre Viva 123" },
+                        "totalAmount": { "type": "number", "example": 150.75 },
+                        "products": {
+                          "type": "array",
+                          "items": { "$ref": "#/components/schemas/ProductOrderDto" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": { "description": "Productos agregados correctamente" },
+                "400": { "description": "Datos inválidos" }
+              }
+            }
+          },
+          "/v1/orders/getOrder": {
+            "get": {
+              "tags": ["Orders"],
+              "summary": "Obtener orden por usuario",
+              "parameters": [
+                {
+                  "name": "username",
+                  "in": "query",
+                  "required": true,
+                  "schema": { "type": "string", "minLength": 4, "maxLength": 50 },
+                  "example": "jrodas"
+                }
+              ],
+              "responses": {
+                "200": { "description": "Orden encontrada" },
+                "404": { "description": "Orden no encontrada" }
+              }
+            }
+          },
+          "/v1/orders/adjustOrderDetails": {
+            "put": {
+              "tags": ["Orders"],
+              "summary": "Ajustar detalles de la orden",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "required": ["userId", "orderDetailIds"],
+                      "properties": {
+                        "userId": { "type": "integer", "minimum": 1, "example": 10 },
+                        "orderDetailIds": {
+                          "type": "array",
+                          "items": { "$ref": "#/components/schemas/DeleteProductDto" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": { "description": "Orden ajustada correctamente" },
+                "400": { "description": "Datos inválidos" }
+              }
+            }
+          },
+          "/v1/orders/deleteOrder/{idOrder}": {
+            "delete": {
+              "tags": ["Orders"],
+              "summary": "Eliminar orden",
+              "parameters": [
+                {
+                  "name": "idOrder",
+                  "in": "path",
+                  "required": true,
+                  "schema": { "type": "integer", "minimum": 1 },
+                  "example": 25
+                }
+              ],
+              "responses": {
+                "200": { "description": "Orden eliminada correctamente" },
+                "404": { "description": "Orden no encontrada" }
+              }
+            }
+          },
+          "/v1/payment/createPayment": {
+            "post": {
+              "tags": ["Payment"],
+              "summary": "Crear un pago",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "required": ["userId", "amount", "idOrder"],
+                      "properties": {
+                        "userId": { "type": "integer", "minimum": 1, "maximum": 9999999, "example": 123 },
+                        "amount": { "type": "number", "minimum": 0.01, "maximum": 999999.99, "example": 250.75 },
+                        "idTransaction": { "type": "string", "format": "uuid", "example": "550e8400-e29b-41d4-a716-446655440000" },
+                        "paymentType": { "type": "string", "example": "CREDIT_CARD" },
+                        "paymentStatus": { "type": "string", "example": "PENDING" },
+                        "idOrder": { "type": "integer", "example": 987 },
+                        "paymentDate": { "type": "string", "format": "date-time", "example": "2026-04-15T22:30:00" }
+                      }
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": { "description": "Pago creado exitosamente" },
+                "400": { "description": "Datos inválidos en la petición" }
+              }
+            }
+          },
+          "/v1/payment/getStatusPay": {
+            "get": {
+              "tags": ["Payment"],
+              "summary": "Obtener estado de pago",
+              "parameters": [
+                {
+                  "name": "codeTransaction",
+                  "in": "query",
+                  "required": true,
+                  "schema": { "type": "string", "format": "uuid" },
+                  "example": "550e8400-e29b-41d4-a716-446655440000"
+                },
+                {
+                  "name": "idProduct",
+                  "in": "query",
+                  "required": true,
+                  "schema": { "type": "integer", "minimum": 1 },
+                  "example": 101
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Estado del pago encontrado",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "paymentStatus": { "type": "string", "example": "PAID" },
+                          "amount": { "type": "number", "example": 250.75 },
+                          "paymentDate": { "type": "string", "format": "date-time", "example": "2026-04-15T22:30:00" }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": { "description": "Pago no encontrado" }
+              }
+            }
+          }
+        },
+        "components": {
+          "securitySchemes": {
+            "bearerAuth": {
+              "type": "http",
+              "scheme": "bearer",
+              "bearerFormat": "JWT"
+            }
+          },
+          "schemas": {
+            "ProductOrderDto": {
+              "type": "object",
+              "properties": {
+                "productId": { "type": "integer", "example": 101 },
+                "quantity": { "type": "integer", "example": 2 }
+              }
+            },
+            "DeleteProductDto": {
+              "type": "object",
+              "properties": {
+                "orderDetailId": { "type": "integer", "example": 5001 },
+                "productId": { "type": "integer", "example": 101 },
+                "quantity": { "type": "integer", "example": 1 }
+              }
+            }
+          }
+        }
+      };
+
+      SwaggerUIBundle({
+        spec: spec,
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        tryItOutEnabled: true,
+        requestInterceptor: (request) => request,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIBundle.SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "BaseLayout",
+        persistAuthorization: true
+      });
+    };
+  </script>
+</body>
+</html>

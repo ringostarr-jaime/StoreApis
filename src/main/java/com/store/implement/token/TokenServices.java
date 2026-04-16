@@ -46,8 +46,9 @@ public class TokenServices implements TokenInterfaces {
 	@Override
 	@CircuitBreaker(name = "globalService", fallbackMethod = "fallbackGlobalService")
 	@Retry(name = "globalService")
-	public ResponseEntity<Object> login(LoginDto loginDto) {
-		Client client = clientService.findByUserAndPassword(loginDto);
+	public ResponseEntity<Object> login(LoginDto loginDto) {		
+				
+		Client client = clientService.findClient(loginDto.getUsername());		
 	    User user = new User();	    
 	    try {
 		    if (client == null || !passwordEncoder.matches(loginDto.getPassword(), client.getPassword())) {
