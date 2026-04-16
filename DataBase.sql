@@ -1,3 +1,4 @@
+CREATE DATABASE `store` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 CREATE TABLE `clients` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) DEFAULT NULL,
@@ -20,6 +21,7 @@ CREATE TABLE `clients` (
   UNIQUE KEY `username_3` (`username`),
   UNIQUE KEY `email_3` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `order_details` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `order_id` bigint DEFAULT NULL,
@@ -32,6 +34,7 @@ CREATE TABLE `order_details` (
   KEY `order_details_ibfk_1` (`order_id`),
   CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `orders` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `client_id` bigint DEFAULT NULL,
@@ -43,6 +46,8 @@ CREATE TABLE `orders` (
   KEY `orders_ibfk_1` (`client_id`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 CREATE TABLE `payments` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `client_id` bigint DEFAULT NULL,
