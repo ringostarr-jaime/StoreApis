@@ -22,3 +22,15 @@ DON'T FORGET TO RUN THE DATABASE SCRIPT
 </br>
 <img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen9.png" width="650" >
 </br>
+USE OF SWAGGER
+<img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen10.png" width="650" >
+</br>
+The services must be running locally and on port 8080 for this example; open the token service and generate
+<img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen12.png" width="650" >
+</br>
+Copy the token without the bear and click on authorize 
+<img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen11.png" width="650" >
+</br>
+Paste the token and again in authorize; with this, you will be able to consume each service. The services that do not use a token are -token and addClient -. To generate a token, you must have a username and password that belong to a user that has been added.
+<img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen13.png" width="650" >
+</br>
