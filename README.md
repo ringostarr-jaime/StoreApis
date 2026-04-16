@@ -12,8 +12,13 @@ Steps to run the services
 Final STEP FOR RUN SERVICES
 <img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen5.png" width="650" >
 </br>
- Or you can run it directly from the jar.
+ OR YOU CAN RUN IT DIRECTLY FROM THE JAR.
 <img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen6.png" width="650" >
 </br>
 <img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen7.png" width="650" >
+</br>
+DON'T FORGET TO RUN THE DATABASE SCRIPT
+<img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen8.png" width="650" >
+</br>
+<img src="https://github.com/ringostarr-jaime/StoreApis/blob/main/imagen9.png" width="650" >
 </br>
